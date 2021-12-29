@@ -1,0 +1,346 @@
+{
+	"info": {
+		"_postman_id": "7a6b55cf-98a5-449b-9c7a-955b1021e940",
+		"name": "Cuti",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Add Cuti",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Andra\",\r\n    \"startDate\": \"1-10-2021\",\r\n    \"endDate\": \"05-11-2021\",\r\n    \"reason\": \"Married\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/bpmn/cuti",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"bpmn",
+						"cuti"
+					],
+					"query": [
+						{
+							"key": "withVariable",
+							"value": "false",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List Cuti",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/bpmn/cuti",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"bpmn",
+						"cuti"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Cuti Specs",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/bpmn/cuti/spec",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"bpmn",
+						"cuti",
+						"spec"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List Review",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"var jsonData = JSON.parse(responseBody);\r",
+							"postman.setEnvironmentVariable(\"idReview\", jsonData.data.content[0].id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/bpmn/cuti/review/list",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"bpmn",
+						"cuti",
+						"review",
+						"list"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Diterima",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\" : \"dika\",\r\n    \"startDate\" : \"2021-10-01\",\r\n    \"endDate\" : \"2021-10-05\",\r\n    \"reason\" : \"Revisi\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/bpmn/cuti/review/{{idReview}}/submit?decision=diterima",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"bpmn",
+						"cuti",
+						"review",
+						"{{idReview}}",
+						"submit"
+					],
+					"query": [
+						{
+							"key": "decision",
+							"value": "diterima"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Ditolak",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\" : \"dika\",\r\n    \"startDate\" : \"2021-10-01\",\r\n    \"endDate\" : \"2021-10-05\",\r\n    \"reason\" : \"Revisi\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/bpmn/cuti/review/{{idReview}}/submit?decision=ditolak",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"bpmn",
+						"cuti",
+						"review",
+						"{{idReview}}",
+						"submit"
+					],
+					"query": [
+						{
+							"key": "decision",
+							"value": "ditolak"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Revisi",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\" : \"dika\",\r\n    \"startDate\" : \"2021-10-01\",\r\n    \"endDate\" : \"2021-10-05\",\r\n    \"reason\" : \"Revisi\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/bpmn/cuti/review/{{idCuti}}/submit?decision=revisi",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"bpmn",
+						"cuti",
+						"review",
+						"{{idCuti}}",
+						"submit"
+					],
+					"query": [
+						{
+							"key": "decision",
+							"value": "revisi"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List Revisi",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"var jsonData = JSON.parse(responseBody);",
+							"postman.setEnvironmentVariable(\"idRevisi\", jsonData.data.content[0].id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/bpmn/cuti/revisi/list",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"bpmn",
+						"cuti",
+						"revisi",
+						"list"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Submit Revisi",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\" : \"dika\",\r\n    \"startDate\" : \"2021-10-01\",\r\n    \"endDate\" : \"2021-10-05\",\r\n    \"reason\" : \"Revisi\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/bpmn/cuti/review/{{idRevisi}}/submit?decision=",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"bpmn",
+						"cuti",
+						"review",
+						"{{idRevisi}}",
+						"submit"
+					],
+					"query": [
+						{
+							"key": "decision",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "review specs",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/bpmn/cuti/revisi/spec",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"bpmn",
+						"cuti",
+						"revisi",
+						"spec"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "revisi specs",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/bpmn/cuti/revisi/spec",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"bpmn",
+						"cuti",
+						"revisi",
+						"spec"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
